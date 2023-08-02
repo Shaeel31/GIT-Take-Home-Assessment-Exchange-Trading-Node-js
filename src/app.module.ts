@@ -5,7 +5,6 @@ import { AppService } from './app.service';
 import { SharedModule } from './shared/shared.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from './shared/services/config/config.service';
-import { QueryService } from './shared/services/query/query.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpInterceptor } from './interceptors/httpinterceptor/http.interceptor';
 import { OrdersModule } from './modules/orders/orders.module';
@@ -19,7 +18,7 @@ import { OrdersModule } from './modules/orders/orders.module';
       inject: [ConfigService],
     }),  ],
   controllers: [AppController],
-  providers:[AppService, QueryService,
+  providers:[AppService,
     {
       provide: APP_INTERCEPTOR,
       useClass: HttpInterceptor,
