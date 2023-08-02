@@ -1,0 +1,42 @@
+# Stage 1: Build the whole system
+FROM node:14 as build
+
+WORKDIR /app
+
+# Copy package.json and package-lock.json to install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the entire application code to the container
+COPY . .
+
+# Build the system
+RUN npm run build
+
+# Stage 2: Run test cases
+FROM build as test
+
+# Run test cases here (assuming you have test scripts in your package.json)
+RUN npm test
+
+# Stage 3: Create final build
+FROM node:14-alpine as final
+
+WORKDIR /app
+
+# Copy the built artifacts from the 'build' stage to the 'final' stage
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/package*.json ./
+
+# Install production dependencies
+RUN npm install --only=production
+
+# Expose the port your application listens to (replace with your actual port)
+EXPOSE 3000
+
+# Start your application (replace 'start' with the actual script to run your application)
+CMD [ "npm", "start" ]
+
+
+To build the Docker image, run the following command in the same directory as the Dockerfile:
+docker build -t image_name .

@@ -3,7 +3,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { Order } from '../../models/order.model';
-import { BinaryTree } from './binary-tree';
+import { BinaryTree } from '../binary-tree/binary-tree';
 
 @Controller('orders')
 export class OrdersController {

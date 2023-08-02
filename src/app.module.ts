@@ -8,10 +8,10 @@ import { ConfigService } from './shared/services/config/config.service';
 import { QueryService } from './shared/services/query/query.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpInterceptor } from './interceptors/httpinterceptor/http.interceptor';
+import { OrdersModule } from './modules/orders/orders.module';
 
 @Module({
   imports: [
-
     TypeOrmModule.forRootAsync({
       imports: [SharedModule,],
       useFactory: (configService: ConfigService) =>

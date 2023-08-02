@@ -68,10 +68,6 @@ export class ConfigService {
         };
     }
 
-    public jwtKey(key: string): string {
-        return fs.readFileSync(path.resolve(this.get(key)), 'utf8').replace(/\\n/gm, '\n')
-    }
-
     public getNumber(key: string): number {
         return Number(this.get(key));
     }
